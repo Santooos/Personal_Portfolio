@@ -1,6 +1,16 @@
 from flask import Flask, render_template, request, redirect
+from flask_mail import Mail, Message
 import csv
 app = Flask(__name__)
+
+#confuguring the Flask Mail
+# app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+# app.config['MAIL_PORT'] = 587
+# app.config['MAIL_USERNAME']="@gmail.com"
+# app.config['MAIL_PASSWORD'] = "xxxxxxxx"
+# app.config['MAIL_USE_TLS'] = True
+
+# mail = Mail(app)
 
 @app.route('/')
 def my_home():
@@ -36,11 +46,19 @@ def submit_form():
         try:
             data = request.form.to_dict()
             write_to_csv(data)
+
+            #Send an email
+            # msg = Message('New form Submission', sender="santosh@gamil.com",recipients=data['email'])
+            # msg.body = f"Name: {data['name']}\nEmail: {data['email']}\nMessage:; {data['message']}"
+            # mail.send(msg)
             return redirect('/thankyou.html')
         except:
             return 'did not save to databases'
     else:
         return 'Something went wrong.Try Again !!'
+
+
+
 
 
 

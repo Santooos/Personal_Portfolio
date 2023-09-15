@@ -52,6 +52,7 @@ def submit_form():
 
 # @app.route('/elements.html')
 # def blog():
+
 #     return render_template('elements.html')
 
 # @app.route('/generic.html')
